@@ -1,0 +1,208 @@
+/*site wide styling*/
+body
+{
+  font-family: Arial;
+}
+
+/*title background*/
+header > .site-header
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  height: 100px;
+  width: 100%;
+  background-color: Grey;
+}
+
+.site-header > a
+{
+  position: inherit;
+  width: 800px;
+
+}
+
+.site-title
+{
+  position: inherit;
+  top: 17px;
+  left: 70px;
+  margin: 0px;
+  color: black;
+  font-size: 60px;
+  font-weight: 100;
+}
+
+.site-title-link > img
+{
+  position: inherit;
+  top: 15px;
+  left: 20px;
+}
+
+#menu-open-button
+{
+  position: absolute;
+  float: right;
+  padding: 0px;
+  border-style: hidden;
+  background-color: grey;
+  width: 40px;
+  height: 40px;
+  right: 20px;
+  top: 35px;
+}
+
+.user-box
+{
+  position: inherit;
+  float: right;
+  top: 42.5px;
+  right: 80px;
+}
+
+#username-input
+{
+  height: 20px;
+  background-color: WhiteSmoke;
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgrey;
+  border-radius: 3px;
+}
+
+.user-display
+{
+  position: inherit;
+  float: right;
+  top: 25px;
+  right: 180px;
+}
+
+#username
+{
+  position: inherit;
+  color: black;
+  font-size: 20px;
+}
+
+nav
+{
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  margin: 0px;
+  height: 45px;
+  width: 100%;
+  background-color: lightgrey;
+}
+
+/*list of nav items styling*/
+.navlist
+{
+  position: absolute;
+  left: 10px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  list-style-type: none;
+}
+
+/*navlink styling*/
+.navlink > a
+{
+  top: 10px;
+  font-size: 20px;
+  margin-left: 15px;
+  margin-top: 5px;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  float: left;
+}
+
+.navlink > a:hover
+{
+  color: darkgrey;
+}
+
+.active > a
+{
+  border-bottom-style: solid;
+  border-bottom-width: thick;
+  border-bottom-color: darkgrey;
+}
+
+.navbar-search
+{
+  float: right;
+  padding-right: 20px;
+}
+
+#navbar-search-input
+{
+  margin-top: 11.5px;
+  height: 20px;
+  background-color: WhiteSmoke;
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgrey;
+  border-radius: 3px;
+}
+
+#navbar-search-input:focus
+{
+  background-color: white;
+  outline: none;
+}
+
+#navbar-search-button
+{
+  position: relative;
+  background-color: lightgrey;
+  border-style: hidden;
+  top: 5px;
+  padding-left: 0px;
+}
+
+#navbar-search-button:hover
+{
+  color: DodgerBlue;
+  cursor: pointer;
+}
+
+.side-menu
+{
+  position: absolute;
+  float: right;
+  padding: 0px;
+  border: hidden;
+  right: 0px;
+  top: 0px;
+  width: 10%;
+  height: 100%;
+  background-color: darkgrey;
+}
+
+.side-menu-item
+{
+  list-style-type: none;
+}
+
+.side-menu-item > a
+{
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+
+header > .menu-is-open
+{
+  width: 90%;
+}
+
+.hidden
+{
+  display: none;
+}
