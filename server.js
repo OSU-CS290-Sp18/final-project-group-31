@@ -10,21 +10,36 @@ var port = process.env.PORT || 3000;
 app.engine('handlebars', exphbs({defaultLayout: 'skeleton'}));
 app.set('view engine', 'handlebars');
 
+//serve public files
+app.use(express.static('public'));
+
 //serve home page
 app.get('/', function(req, res)
 {
   res.status(200);
-  res.render('home', {gamespage: true, forumspage: false});
+  res.render('home',
+  {
+    gamesPage: true});
 });
 
 app.get('/forums', function(req, res)
 {
   res.status(200);
-  res.render('forums',{gamespage: false, forumspage: true});
+  res.render('forums',
+  {
+    forumsPage: true,
+    forumCatagories: true});
 });
 
-//serve public files
-app.use(express.static('public'));
+app.get('/forums/:catagory', function(req, res)
+{
+  res.status(200);
+  res.render('forums',
+  {
+    forumsPage: true,
+    forumThreads: true,
+    catagory: req.params.catagory});
+});
 
 //serve 404 page
 app.get('*', function (req, res) {
