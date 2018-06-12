@@ -14,7 +14,13 @@ app.set('view engine', 'handlebars');
 app.get('/', function(req, res)
 {
   res.status(200);
-  res.render('home');
+  res.render('home', {gamespage: true, forumspage: false});
+});
+
+app.get('/forums', function(req, res)
+{
+  res.status(200);
+  res.render('forums',{gamespage: false, forumspage: true});
 });
 
 //serve public files
