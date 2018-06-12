@@ -41,52 +41,6 @@ header > .site-header
   left: 20px;
 }
 
-#menu-open-button
-{
-  position: absolute;
-  float: right;
-  padding: 0px;
-  border-style: hidden;
-  background-color: grey;
-  width: 40px;
-  height: 40px;
-  right: 20px;
-  top: 35px;
-}
-
-.user-box
-{
-  position: inherit;
-  float: right;
-  top: 42.5px;
-  right: 80px;
-}
-
-#username-input
-{
-  height: 20px;
-  background-color: WhiteSmoke;
-  border-style: solid;
-  border-width: thin;
-  border-color: lightgrey;
-  border-radius: 3px;
-}
-
-.user-display
-{
-  position: inherit;
-  float: right;
-  top: 25px;
-  right: 180px;
-}
-
-#username
-{
-  position: inherit;
-  color: black;
-  font-size: 20px;
-}
-
 nav
 {
   position: absolute;
@@ -172,37 +126,24 @@ nav
   cursor: pointer;
 }
 
-.side-menu
-{
-  position: absolute;
-  float: right;
-  padding: 0px;
-  border: hidden;
-  right: 0px;
-  top: 0px;
-  width: 10%;
-  height: 100%;
-  background-color: darkgrey;
-}
-
-.side-menu-item
-{
-  list-style-type: none;
-}
-
-.side-menu-item > a
-{
-  text-decoration: none;
-  color: black;
-  font-size: 20px;
-}
-
-header > .menu-is-open
-{
-  width: 90%;
-}
-
 .hidden
 {
   display: none;
+}
+
+.error-container {
+  margin-top: 150px;
+  text-align: center;
+}
+
+.error-container h2 {
+  margin: 10px 0;
+  font-size: 96px;
+  font-weight: 100;
+}
+
+.error-container h3 {
+  margin: 10px 0;
+  font-size: 36px;
+  font-weight: 400;
 }

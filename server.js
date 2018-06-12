@@ -1,10 +1,4 @@
-/*
- * Write your routing code in this file.  Make sure to add your name and
- * @oregonstate.edu email address below.
- *
- * Name: Jeremy Thoennes
- * Email: thoennej@oregonstate.edu
- */
+//Stick Figure Gaming Server side javascript
 
 var path = require('path');
 var express = require('express');
