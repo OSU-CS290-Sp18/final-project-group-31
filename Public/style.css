@@ -227,6 +227,40 @@ nav
   color: black;
 }
 
+.new-thread-button
+{
+  position: absolute;
+  top: 120px;
+  right: 245px;
+  padding: 15px;
+  padding-left: 50px;
+  border-style: ridge;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  background-color: WhiteSmoke;
+}
+
+.button:focus
+{
+  outline: none;
+}
+
+.button:active
+{
+  border-style: inset;
+}
+
+.new-thread-plus
+{
+  position: absolute;
+  top: -35px;
+  left: 10px;
+  font-size: 50px;
+  font-weight: 200;
+}
+
 .thread-subject
 {
   position: absolute;
@@ -350,6 +384,20 @@ nav
   position: absolute;
   top: 300px;
   right: 20px;
+  padding: 10px;
+  border-style:ridge;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background-color: WhiteSmoke;
+}
+
+.cancel-button
+{
+  position: absolute;
+  top: 300px;
+  right: 140px;
   padding: 10px;
   border-style:ridge;
   border-radius: 20px;
