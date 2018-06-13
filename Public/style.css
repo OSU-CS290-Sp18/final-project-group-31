@@ -183,7 +183,7 @@ nav
 {
   position: relative;
   flex: 1 100px;
-  width: 60%;
+  width: 75%;
   margin: 5px;
   border-style: solid;
   border-width: thick;
@@ -257,7 +257,35 @@ nav
 {
   position: absolute;
   float: right;
-  top: 40px;
+  top: 30px;
   right: 10px;
   color: darkgrey;
+}
+
+.thread-text
+{
+  position: relative;
+  top: 55px;
+  left: 200px;
+  width: 75%;
+  padding-bottom: 30px;
+}
+
+.reply-button
+{
+  position: relative;
+  left: 20px;
+  padding-bottom: 15px;
+  border-style: hidden;
+  font-size: 16px;
+  color: black;
+  background-color: WhiteSmoke;
+}
+
+.reply-button-img
+{
+  position: inherit;
+  top: 10px;
+  height: 30px;
+  width:45px;
 }

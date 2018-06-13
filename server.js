@@ -22,6 +22,7 @@ app.get('/', function(req, res)
     gamesPage: true});
 });
 
+//serve forum home page
 app.get('/forums', function(req, res)
 {
   res.status(200);
@@ -31,6 +32,7 @@ app.get('/forums', function(req, res)
     forumCatagories: true});
 });
 
+//serve a forum catagory
 app.get('/forums/:catagory', function(req, res)
 {
   res.status(200);
@@ -39,6 +41,18 @@ app.get('/forums/:catagory', function(req, res)
     forumsPage: true,
     forumThreads: true,
     catagory: req.params.catagory});
+});
+
+//serve a specific thread
+app.get('/forums/:catagory/:threadId', function(req, res)
+{
+  res.status(200);
+  res.render('forums',
+  {
+    forumsPage: true,
+    individualThread: true,
+    catagory: req.params.catagory,
+    threadId: req.params.threadId});
 });
 
 //serve 404 page
