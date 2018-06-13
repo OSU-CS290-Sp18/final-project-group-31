@@ -265,19 +265,24 @@ nav
 .thread-text
 {
   position: relative;
-  top: 55px;
+  top: 60px;
   left: 200px;
   width: 75%;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
+  font-size: 18px;
 }
 
 .reply-button
 {
   position: relative;
-  left: 20px;
+  float: right;
+  right: 20px;
+  margin-bottom: 10px;
   padding-bottom: 15px;
-  border-style: hidden;
+  border-style:ridge;
+  border-radius: 20px;
   font-size: 16px;
+  font-weight: bold;
   color: black;
   background-color: WhiteSmoke;
 }
@@ -288,4 +293,68 @@ nav
   top: 10px;
   height: 30px;
   width:45px;
+}
+
+.filler
+{
+  position: relative;
+  height: 20px;
+}
+
+.author-label
+{
+  position: relative;
+  top: 5px;
+  left: 20px;
+  font-size: 18px;
+  color: black;
+}
+
+.author-input
+{
+  position: absolute;
+  top: 15px;
+  left: 110px;
+  font-size: 18px;
+}
+
+.subject-label
+{
+  position: relative;
+  top: 5px;
+  left: 20px;
+  font-size: 18px;
+  color: black;
+}
+
+.subject-input
+{
+    position: absolute;
+    top: 50px;
+    left: 110px;
+    font-size: 18px;
+}
+
+.post-input
+{
+  position: relative;
+  left: 110px;
+  font-size: 18px;
+  height: 200px;
+  width: 75%;
+  margin-bottom: 60px;
+}
+
+.post-button
+{
+  position: absolute;
+  top: 300px;
+  right: 20px;
+  padding: 10px;
+  border-style:ridge;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background-color: WhiteSmoke;
 }
