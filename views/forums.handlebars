@@ -2,31 +2,49 @@
 
   {{>header}}
 
+  <main class="forum-holder">
+    <h1 class="forum-label">Forums</h1>
   {{#if forumCatagories}}
-    <main class="forum-holder">
-      <h1 class="forum-label">Forums</h1>
-      <div class="catagories-holder">
-        <a href="/forums/General%20Discussion" class="catagory-box">
+      <div class="forum-item-holder">
+        <a href="/forums/General-Discussion" class="forum-item">
           <img class="catagory-picture" src="/img/stickfiguretitle.png">
           <h2 class="catagory-title">General Discussion</h2>
           <h3 class="catagory-description">A place to talk about whatever (Within reason!).</h3>
         </a>
 
-        <a href="/forums/Stick%20Figure%20Clicker" class="catagory-box">
+        <a href="/forums/Stick-Figure-Clicker" class="forum-item">
           <img class="catagory-picture" src="/img/stickfiguretitle.png">
           <h2 class="catagory-title">Stick Figure Clicker!</h2>
           <h3 class="catagory-description">Discussion about the Stick Figure Clicker! game.</h3>
         </a>
       </div>
-    </main>
   {{/if}}
 
   {{#if forumThreads}}
-    
+    <h1 class="catagory-label">Stick Figure Clicker! threads</h1>
+
+    <div class="forum-item-holder">
+      <a href="forums/Stick-Figure-Clicker/123-this-is-a-thread" class="forum-item">
+        <h2 class="thread-subject">This is a thread</h2>
+        <h3 class="thread-author">By Author</h3>
+        <h3 class="thread-comments">1 comments</h3>
+        <h3 class="thread-views">5 views</h3>
+      </a>
+
+      <a href="forums/Stick-Figure-Clicker/925-this-is-also-a-thread" class="forum-item">
+        <h2 class="thread-subject">This is also a thread</h2>
+        <h3 class="thread-author">By Some Person</h3>
+        <h3 class="thread-comments">0 comments</h3>
+        <h3 class="thread-views">1 views</h3>
+      </a>
+    </div>
+
   {{/if}}
 
   {{#if individualThread}}
 
   {{/if}}
+
+  </main>
 
 </body>

@@ -4,6 +4,7 @@ body
   font-family: Arial;
 }
 
+
 /*title background*/
 header > .site-header
 {
@@ -156,7 +157,6 @@ nav
   left: 0px;
   height: 100%;
   width: 100%;
-  background-color: WhiteSmoke;
 }
 
 .forum-label
@@ -164,9 +164,10 @@ nav
   text-align: center;
   font-size: 50px;
   font-weight: 400;
+  color: black;
 }
 
-.catagories-holder
+.forum-item-holder
 {
   position: absolute;
   padding: 0px
@@ -178,7 +179,7 @@ nav
   align-items: center;
 }
 
-.catagory-box
+.forum-item
 {
   position: relative;
   flex: 1 100px;
@@ -188,6 +189,7 @@ nav
   border-width: thick;
   border-color: darkgrey;
   border-radius: 20px;
+  background-color: WhiteSmoke;
 }
 
 .catagory-picture
@@ -215,4 +217,47 @@ nav
   left: 100px;
   font-size: 16px;
   color: grey;
+}
+
+.catagory-label
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 400;
+  color: black;
+}
+
+.thread-subject
+{
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  font-size: 24px;
+  color: black;
+}
+
+.thread-author
+{
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  font-size: 16px;
+  color: grey;
+}
+
+.thread-comments
+{
+  position: absolute;
+  float: right;
+  right: 10px;
+  color: darkgrey;
+}
+
+.thread-views
+{
+  position: absolute;
+  float: right;
+  top: 40px;
+  right: 10px;
+  color: darkgrey;
 }
