@@ -34,9 +34,9 @@ var post = function(event)
       var shortSubject = subject;
   }
 
-  if(content.length > 200)
+  if(content.length > 140)
   {
-    var shortContent = content.slice(0, 200) +  "...";
+    var shortContent = content.slice(0, 140) +  "...";
   }
   else
   {
