@@ -64,7 +64,17 @@ var post = function(event)
     }
     else if(event.currentTarget.id === "commentPostButton")
     {
+      var data =
+      {
+        commentAuthor: shortAuthor,
+        commentSubject: shortSubject,
+        commentContent: content
+      }
 
+      var newComment = Handlebars.templates.comment(data);
+
+      var forumItemContainer = document.querySelector('.forum-item-holder');
+      forumItemContainer.insertAdjacentHTML('beforeend', newComment);
     }
 
     //call cancelPost to remove the new post form
