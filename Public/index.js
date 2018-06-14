@@ -8,13 +8,9 @@ var newPostFormActive = false;
 var newThreadButton = document.getElementsByClassName("new-thread-button")[0];
 var replyButton = document.getElementsByClassName("reply-button")[0];
 
-var post = function(event)
+//function to get a short version of the author, subject, and content
+var shortenContent = function(author, subject, content)
 {
-  //grab the text from the new post form fields
-  var author = document.getElementsByClassName("author-input")[0].value;
-  var subject = document.getElementsByClassName("subject-input")[0].value;
-  var content = document.getElementsByClassName("post-input")[0].value;
-
   //if the values are too long, shorten them
   if(author.length > 20)
   {
@@ -43,33 +39,145 @@ var post = function(event)
       var shortContent = content;
   }
 
+  var result =
+  {
+    shortAuthor: shortAuthor,
+    shortSubject: shortSubject,
+    shortContent: shortContent
+  };
+
+  return result;
+}
+
+//function to pack the post content for a thread
+var packThreadContent = function(author, subject, content)
+{
+  //get the short version of content variables
+  var short = shortenContent(author, subject, content);
+
+  //create the url for the new thread
+  var threadId = Math.floor(Math.random() * 1000) + "-" + subject.replace(" ", "-");
+  var url = window.location.pathname + "/" + threadId;
+
+  var result =
+  {
+    author: author,
+    subject: subject,
+    content: content,
+    shortAuthor: short.shortAuthor,
+    shortSubject: short.shortSubject,
+    shortContent: short.shortContent,
+    threadId: threadId,
+    url: url
+  };
+
+  return result;
+}
+
+var packCommentContent = function(author, subject, content)
+{
+  //get the short version of content variables
+  var short = shortenContent(author, subject, content);
+
+  var result =
+  {
+    author: author,
+    subject: subject,
+    content: content,
+    shortAuthor: short.shortAuthor,
+    shortSubject: short.shortSubject,
+    shortContent: short.shortContent,
+  };
+
+  return result;
+}
+
+//function to post a thread or comment
+var post = function(event)
+{
+  //grab the text from the new post form fields
+  var author = document.getElementsByClassName("author-input")[0].value;
+  var subject = document.getElementsByClassName("subject-input")[0].value;
+  var content = document.getElementsByClassName("post-input")[0].value;
+
+
+
   //if all fields are filled out proceed, otherwise alert the user
   if(author && subject && content)
   {
     if(event.currentTarget.id === "threadPostButton")
     {
-      var data =
+      //pack the content
+      var data = packThreadContent(author, subject, content);
+
+      //create a post to the server
+      var request = new XMLHttpRequest();
+
+      //create the post pathname and body
+      var requestURL = window.location.pathname + '/newThread';
+      var requestBody = JSON.stringify(data);
+
+      //start the post
+      request.open("POST", requestURL);
+      request.setRequestHeader('Content-Type', 'application/json');
+
+      //create the post callback function for when it completes
+      request.addEventListener('load', function (event)
       {
-        threadAuthor: shortAuthor,
-        threadSubject: shortSubject,
-        threadContent: shortContent,
-        threadCommentCount: 0,
-        threadViewCount: 0
-      }
+        if (event.target.status !== 200)
+        {
+          var message = event.target.response;
+          alert("Error creating thread: " + message);
+        }
+        else
+        {
+          //go to the new thread url
+          //LOOKATME! Note: add this after db is in place
+        }
+      });
 
+      //send the post request
+      request.send(requestBody);
+
+      //create a new collapsed thread (going to remove this later)
       var newCollapsedThread = Handlebars.templates.collapsedThread(data);
-
       var forumItemContainer = document.querySelector('.forum-item-holder');
       forumItemContainer.insertAdjacentHTML('beforeend', newCollapsedThread);
     }
+    //send comment post
     else if(event.currentTarget.id === "commentPostButton")
     {
-      var data =
+      //pack the content
+      var data = packCommentContent(author, subject, content);
+
+      //create a post to the server
+      var request = new XMLHttpRequest();
+
+      //create the post pathname and body
+      var requestURL = window.location.pathname + '/newComment';
+      var requestBody = JSON.stringify(data);
+
+      //start the post
+      request.open("POST", requestURL);
+      request.setRequestHeader('Content-Type', 'application/json');
+
+      //create the post callback function for when it completes
+      request.addEventListener('load', function (event)
       {
-        commentAuthor: shortAuthor,
-        commentSubject: shortSubject,
-        commentContent: content
-      }
+        if (event.target.status !== 200)
+        {
+          var message = event.target.response;
+          alert("Error creating thread: " + message);
+        }
+        else
+        {
+          //go to the new thread url
+          //LOOKATME! Note: add this after db is in place
+        }
+      });
+
+      //send the post request
+      request.send(requestBody);
 
       var newComment = Handlebars.templates.comment(data);
 
