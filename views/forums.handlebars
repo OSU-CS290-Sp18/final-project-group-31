@@ -1,5 +1,4 @@
 <body>
-  <script src="/newPostTemplate.js"></script>
 
   {{>header}}
 
@@ -22,7 +21,7 @@
   {{/if}}
 
   {{#if forumThreads}}
-    <h1 class="catagory-label">Stick Figure Clicker! threads</h1>
+    <a class="catagory-label-link" href="/forums/Stick-Figure-Clicker"><h1 class="catagory-label">Stick Figure Clicker! threads</h1></a>
     <button class="new-thread-button button" type="button" id="threadButton"><h1 class="new-thread-plus">+</h1>New Thread</button>
 
     <div class="forum-item-holder">
@@ -40,11 +39,10 @@
         <h3 class="thread-views">1 views</h3>
       </a>
     </div>
-    <script src="/newPost.js"></script>
   {{/if}}
 
   {{#if individualThread}}
-    <a href="/forums/Stick-Figure-Clicker"><h1 class="catagory-label">Stick Figure Clicker! threads</h1></a>
+    <a class="catagory-label-link" href="/forums/Stick-Figure-Clicker"><h1 class="catagory-label">Stick Figure Clicker! threads</h1></a>
     <div class="forum-item-holder">
       <div class="forum-item" id="threadPost">
         <h2 class="thread-subject">This is also a thread</h2>
@@ -66,7 +64,6 @@
         <div class="filler"></div>
       </div>
     </div>
-    <script src="/newPost.js"></script>
   {{/if}}
 
   </main>

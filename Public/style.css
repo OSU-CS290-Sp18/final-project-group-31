@@ -227,6 +227,11 @@ nav
   cursor:pointer;
 }
 
+.catagory-label-link
+{
+  text-decoration: none;
+}
+
 .new-thread-button
 {
   position: relative;
