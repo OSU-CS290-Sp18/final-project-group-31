@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "handlebars views/partials/newPost.handlebars -f public/newPostTemplate.js",
+    "build": "handlebars views/partials/newPost.handlebars -f public/newPostTemplate.js & handlebars views/partials/collapsedThread.handlebars -f public/collapsedThreadTemplate.js",
     "prestart": "npm run build"
   },
   "repository": {

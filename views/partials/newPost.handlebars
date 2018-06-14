@@ -4,6 +4,11 @@
   <h2 class="subject-label">Subject:</h2>
   <input class="subject-input" type="text">
   <textarea class="post-input"></textarea>
-  <button class="post-button button" type="button">Post Reply</button>
+  {{#if threadPost}}
+    <button class="post-button button" id="threadPostButton" type="button">Post Thread</button>
+  {{/if}}
+  {{#if commentPost}}
+    <button class="post-button button" id="commentPostButton" type="button">Post Reply</button>
+  {{/if}}
   <button class="cancel-button button" type="button">Cancel</button>
 </div>

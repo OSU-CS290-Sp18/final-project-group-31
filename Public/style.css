@@ -184,6 +184,7 @@ nav
   border-color: darkgrey;
   border-radius: 20px;
   background-color: WhiteSmoke;
+  text-decoration: none;
 }
 
 .catagory-picture
@@ -285,10 +286,21 @@ nav
   color: grey;
 }
 
+.thread-short-content
+{
+  position: relative;
+  top: 40px;
+  left: 20%;
+  width: 60%;
+  font-size: 16px;
+  color: grey;
+}
+
 .thread-comments
 {
   position: absolute;
   float: right;
+  top: 0px;
   right: 10px;
   color: darkgrey;
 }
@@ -383,6 +395,7 @@ nav
   height: 200px;
   width: 75%;
   margin-bottom: 60px;
+  resize: none;
 }
 
 .post-button
