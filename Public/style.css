@@ -121,12 +121,6 @@ nav
   padding-left: 0px;
 }
 
-#navbar-search-button:hover
-{
-  color: DodgerBlue;
-  cursor: pointer;
-}
-
 .hidden
 {
   display: none;
@@ -227,10 +221,17 @@ nav
   color: black;
 }
 
+.catagory-label:hover
+{
+  color: darkgrey;
+  cursor:pointer;
+}
+
 .new-thread-button
 {
-  position: absolute;
-  top: 120px;
+  position: relative;
+  float: right;
+  top: -75px;
   right: 245px;
   padding: 15px;
   padding-left: 50px;
