@@ -56,7 +56,7 @@ app.get('/forums', function(req, res)
 });
 
 //serve a forum catagory
-app.get('/forums/:catagory', function(req, res)
+app.get('/forums/:catagory', function(req, res, next)
 {
   //get the games collection
   var games = db.collection('games');
@@ -72,31 +72,118 @@ app.get('/forums/:catagory', function(req, res)
     }
     else
     {
-      console.log("url: " + catagoryDoc[0].url);
-      console.log("gameTitle: " + catagoryDoc[0].gameTitle);
-      console.log("threads: " + catagoryDoc[0].threads);
-      res.status(200);
-      res.render('forums',
+      //check to make sure the catagory exists
+      if(catagoryDoc[0] === undefined)
       {
-        forumsPage: true,
-        forumThreads: true,
-        catagory: catagoryDoc[0].url,
-        catagoryLabel: catagoryDoc[0].gameTitle,
-        threads: catagoryDoc[0].threads});
+        //if the catagory doesn't exist then go to the next middleware
+        next()
+      }
+      else
+      {
+        res.status(200);
+        res.render('forums',
+        {
+          forumsPage: true,
+          forumThreads: true,
+          catagory: catagoryDoc[0].url,
+          catagoryLabel: catagoryDoc[0].gameTitle,
+          threads: catagoryDoc[0].threads
+        });
+      }
     }
   });
 });
 
 //serve a specific thread
-app.get('/forums/:catagory/:threadId', function(req, res)
+app.get('/forums/:catagory/:threadId', function(req, res, next)
 {
-  res.status(200);
-  res.render('forums',
+  //get the games collection
+  var games = db.collection('games');
+  //get a cursor the thread identified by the threadId
+  var threadCursor = games.find({threadId: req.params.threadId})
+
+  //get the catagory name by replacing the dashes with spaces
+  var catagoryName = req.params.catagory.replace("-", " ");
+
+  threadCursor.toArray(function(err, threadDoc)
   {
-    forumsPage: true,
-    individualThread: true,
-    catagory: req.params.catagory,
-    threadId: req.params.threadId});
+    if(err)
+    {
+      res.status(500).send("Error fetching catagory from DB.");
+    }
+    else
+    {
+      //check if the thread exists
+      if(threadCursor[0] === undefined)
+      {
+        //if the thread doesn't exist then go to the next middleware
+        next();
+      }
+      else
+      {
+        console.log(threadDoc);
+        res.status(200);
+        res.render('forum',
+        {
+          forumsPage: true,
+          individualThread: true,
+          catagory: req.params.catagory,
+          catagoryLabel: catagoryName,
+          threadObject: threadDoc[0],
+          comments: threadDoc[0].comments
+        });
+      }
+    }
+  });
+
+  /*
+  var threadArray;
+  //render object
+  var rendObj = {};
+
+  catagoryCursor.toArray(function(err, catagoryDoc)
+  {
+    if (err)
+    {
+      res.status(500).send("Error fetching catagory from DB.");
+    }
+    else
+    {
+      //get the data from the threadCursor
+      threadCursor.toArray(function(err, threadDoc)
+      {
+        if (err)
+        {
+          res.status(500).send("Error fetching catagory from DB.");
+          //indicate that there was an error
+          threadArray = 1;
+        }
+        else
+        {
+          threadArray = threadDoc;
+        }
+      });
+
+      //wait for the threadArray to be filled
+      while(!threadArray);
+
+      //check for an error before continuing
+      if(threadArray !== 1)
+      {
+        res.status(200);
+        res.render('forums',
+        {
+          forumsPage: true,
+          individualThread: true,
+          catagory:
+        });
+      }
+    }
+  });
+*/
+
+
+
 });
 
 //serve 404 page
