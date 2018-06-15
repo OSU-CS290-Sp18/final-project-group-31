@@ -155,10 +155,18 @@ nav
 
 .forum-label
 {
-  text-align: center;
+  position: relative;
+  left: 44%;
   font-size: 50px;
   font-weight: 400;
   color: black;
+  text-decoration: none;
+}
+
+.forum-label:hover
+{
+  color: darkgrey;
+  cursor:pointer;
 }
 
 .forum-item-holder

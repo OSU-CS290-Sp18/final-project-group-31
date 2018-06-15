@@ -56,9 +56,9 @@ var packThreadContent = function(author, subject, content)
   var short = shortenContent(author, subject, content);
 
   //create the url for the new thread
-  var threadId = Math.floor(Math.random() * 1000) + "-" + subject.replace(" ", "-");
+  //thread id is 3 random digits - the subject to 20 characters with all spaces and symbols changed to dashes
+  var threadId = Math.floor(Math.random() * 1000) + "-" + subject.slice(0, 19).replace("?", "-").replace("/", "-").replace(".", "-").replace(">", "-").replace(",", "-").replace("\'", "-").replace("\"", "-").replace(";", "-").replace(":", "-").replace("{", "-").replace("[", "-").replace("]", "-").replace("}", "-").replace("\\", "-").replace("|", "-").replace("=", "-").replace(")", "-").replace("(", "-").replace("*", "-").replace("&", "-").replace("@", "-").replace("\`", "-").replace("~", "-").replace("!", "-").replace("#", "-").replace("^", "-").replace("$", "-").replace("%", "-").replace("+", "-").replace("<", "-").replace(" ", "-");
   var url = window.location.pathname + "/" + threadId;
-
   var result =
   {
     author: author,
@@ -131,8 +131,8 @@ var post = function(event)
         }
         else
         {
-          //go to the new thread url
-          //LOOKATME! Note: add this after db is in place
+          //once the thread is created, go to the new thread page
+          window.location.pathname = data.url;
         }
       });
 

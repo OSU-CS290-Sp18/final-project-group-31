@@ -127,6 +127,19 @@ app.get('/forums/:catagory/:threadId', function(req, res, next)
           if(catagoryDoc[0].threads[i].threadId === req.params.threadId)
           {
             foundThread = true;
+
+            var updateJSONString = '{"threads.'+i+'.viewCount": 1}'
+            var updateJSON = JSON.parse(updateJSONString);
+
+            //update the view count
+            games.updateOne({"threads.threadId": req.params.threadId}, {$inc: updateJSON}, function(err, result)
+            {
+              if(err)
+              {
+                res.status(500).send("Error adding thread to db: " + err);
+              }
+            });
+            //render the page with the new view count
             res.status(200);
             res.render('forums',
             {
@@ -161,9 +174,36 @@ app.post('/forums/:catagory/newThread', function(req, res)
   //log the the content if all values were sent
   if(req.body && req.body.author && req.body.subject && req.body.content && req.body.shortAuthor && req.body.shortSubject && req.body.shortContent && req.body.threadId && req.body.url)
   {
-    console.log("New thread info: ");
-    console.log(req.body);
-    res.status(200).send("Request successful");
+    //console.log("New thread info: ");
+    //console.log(req.body);
+    //get the games collection
+    var games = db.collection('games');
+
+    //insert a thread under the requested catagory
+    var catagoryCursor = games.updateOne({url: '/forums/' + req.params.catagory}, {$push: {threads:
+    {
+      threadId: req.body.threadId,
+      url: req.body.url,
+      author: req.body.author,
+      subject: req.body.subject,
+      content: req.body.content,
+      shortAuthor: req.body.shortAuthor,
+      shortSubject: req.body.shortSubject,
+      shortContent: req.body.shortContent,
+      commentCount: 0,
+      viewCount: 0
+    }}},
+    function(err, result)
+    {
+      if(err)
+      {
+        res.status(500).send("Error adding thread to db.");
+      }
+      else
+      {
+        res.status(200).send("Successfully added thread to db.");
+      }
+    });
   }
   else
   {
@@ -177,9 +217,82 @@ app.post('/forums/:catagory/:threadId/newComment', function(req, res)
   //log the the content if all values were sent
   if(req.body && req.body.author && req.body.subject && req.body.content && req.body.shortAuthor && req.body.shortSubject && req.body.shortContent)
   {
-    console.log("New comment info: ");
-    console.log(req.body);
-    res.status(200).send("Request successful");
+    var games = db.collection('games');
+    var catagoryCursor = games.find({url: '/forums/' + req.params.catagory});
+
+    //find the index of the thread being commented on
+    catagoryCursor.toArray(function(err, catagoryDoc)
+    {
+      if(err)
+      {
+        res.status(500).send("Error fetching catagory from DB.");
+      }
+      else
+      {
+        //check if the catagory exists
+        if(catagoryDoc[0] === undefined)
+        {
+          //if the catagory doesn't exist then go to the next middleware
+          next();
+        }
+        else
+        {
+          //boolean to indicate if the thread was found
+          var foundThread = false;
+
+          //go through the threads in the catagory to find the one matching the threadId
+          for(var i = 0; i < catagoryDoc[0].threads.length; i++)
+          {
+            if(catagoryDoc[0].threads[i].threadId === req.params.threadId)
+            {
+              foundThread = true;
+
+              var jsonComment =
+              {
+                author: req.body.author,
+                subject: req.body.subject,
+                content: req.body.content,
+                shortAuthor: req.body.shortAuthor,
+                shortSubject: req.body.shortSubject,
+                shortContent: req.body.shortContent
+              };
+              var jsonCommentString = JSON.stringify(jsonComment);
+              var updateJSONString = '{"threads.'+i+'.comments": ' + jsonCommentString + '}'
+              var updateJSON = JSON.parse(updateJSONString);
+
+              //insert a comment under the requested catagory and thread
+              var catagoryCursor = games.updateOne({url: '/forums/' + req.params.catagory}, {$push: updateJSON},
+              function(err, result)
+              {
+                if(err)
+                {
+                  res.status(500).send("Error adding comment to db.");
+                }
+                else
+                {
+                  res.status(200).send("Successfully added comment to db.");
+                }
+              });
+
+              var incJSONString = '{"threads.'+i+'.commentCount": 1}'
+              var incJSON = JSON.parse(incJSONString);
+
+              //update the commentcount
+              games.updateOne({"threads.threadId": req.params.threadId}, {$inc: incJSON}, function(err, result)
+              {
+                if(err)
+                {
+                  console.log(err);
+                }
+              });
+            }
+          }
+          if(!foundThread) next();
+        }
+      }
+    });
+
+
   }
   else
   {
