@@ -99,13 +99,10 @@ app.get('/forums/:catagory/:threadId', function(req, res, next)
 {
   //get the games collection
   var games = db.collection('games');
-  //get a cursor the thread identified by the threadId
-  var threadCursor = games.find({threadId: req.params.threadId})
+  //get a cursor for the catagory at this url
+  var catagoryCursor = games.find({url: '/forums/' + req.params.catagory});
 
-  //get the catagory name by replacing the dashes with spaces
-  var catagoryName = req.params.catagory.replace("-", " ");
-
-  threadCursor.toArray(function(err, threadDoc)
+  catagoryCursor.toArray(function(err, catagoryDoc)
   {
     if(err)
     {
@@ -113,77 +110,43 @@ app.get('/forums/:catagory/:threadId', function(req, res, next)
     }
     else
     {
-      //check if the thread exists
-      if(threadCursor[0] === undefined)
+      //check if the catagory exists
+      if(catagoryDoc[0] === undefined)
       {
-        //if the thread doesn't exist then go to the next middleware
+        //if the catagory doesn't exist then go to the next middleware
         next();
       }
       else
       {
-        console.log(threadDoc);
-        res.status(200);
-        res.render('forum',
+        //boolean to indicate if the thread was found
+        var foundThread = false;
+
+        //go through the threads in the catagory to find the one matching the threadId
+        for(var i = 0; i < catagoryDoc[0].threads.length; i++)
         {
-          forumsPage: true,
-          individualThread: true,
-          catagory: req.params.catagory,
-          catagoryLabel: catagoryName,
-          threadObject: threadDoc[0],
-          comments: threadDoc[0].comments
-        });
+          if(catagoryDoc[0].threads[i].threadId === req.params.threadId)
+          {
+            foundThread = true;
+            res.status(200);
+            res.render('forums',
+            {
+              forumsPage: true,
+              individualThread: true,
+              catagory: catagoryDoc[0].url,
+              catagoryLabel: catagoryDoc[0].gameTitle,
+              threadObject: catagoryDoc[0].threads[i],
+              comments: catagoryDoc[0].threads[i].comments
+            });
+          }
+        }
+        //if none of the threads match, then go to the next middleware
+        if(!foundThread)
+        {
+          next();
+        }
       }
     }
   });
-
-  /*
-  var threadArray;
-  //render object
-  var rendObj = {};
-
-  catagoryCursor.toArray(function(err, catagoryDoc)
-  {
-    if (err)
-    {
-      res.status(500).send("Error fetching catagory from DB.");
-    }
-    else
-    {
-      //get the data from the threadCursor
-      threadCursor.toArray(function(err, threadDoc)
-      {
-        if (err)
-        {
-          res.status(500).send("Error fetching catagory from DB.");
-          //indicate that there was an error
-          threadArray = 1;
-        }
-        else
-        {
-          threadArray = threadDoc;
-        }
-      });
-
-      //wait for the threadArray to be filled
-      while(!threadArray);
-
-      //check for an error before continuing
-      if(threadArray !== 1)
-      {
-        res.status(200);
-        res.render('forums',
-        {
-          forumsPage: true,
-          individualThread: true,
-          catagory:
-        });
-      }
-    }
-  });
-*/
-
-
-
 });
 
 //serve 404 page
