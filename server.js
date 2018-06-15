@@ -58,12 +58,33 @@ app.get('/forums', function(req, res)
 //serve a forum catagory
 app.get('/forums/:catagory', function(req, res)
 {
-  res.status(200);
-  res.render('forums',
+  //get the games collection
+  var games = db.collection('games');
+  //get a cursor for the catagory whos url we are at
+  var catagoryCursor = games.find({url: '/forums/' + req.params.catagory});
+
+  //get the catagory document and respond with the proper contents
+  catagoryCursor.toArray(function(err, catagoryDoc)
   {
-    forumsPage: true,
-    forumThreads: true,
-    catagory: req.params.catagory});
+    if (err)
+    {
+      res.status(500).send("Error fetching catagory from DB.");
+    }
+    else
+    {
+      console.log("url: " + catagoryDoc[0].url);
+      console.log("gameTitle: " + catagoryDoc[0].gameTitle);
+      console.log("threads: " + catagoryDoc[0].threads);
+      res.status(200);
+      res.render('forums',
+      {
+        forumsPage: true,
+        forumThreads: true,
+        catagory: catagoryDoc[0].url,
+        catagoryLabel: catagoryDoc[0].gameTitle,
+        threads: catagoryDoc[0].threads});
+    }
+  });
 });
 
 //serve a specific thread
