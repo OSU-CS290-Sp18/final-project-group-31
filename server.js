@@ -22,7 +22,9 @@ app.use(express.static('public'));
 //use the json parser to parse bodys
 app.use(bodyParser.json());
 
-//serve home page
+//**********************************************************
+//*****************serve home page**************************
+//**********************************************************
 app.get('/', function(req, res)
 {
   res.status(200);
@@ -31,7 +33,11 @@ app.get('/', function(req, res)
     gamesPage: true});
 });
 
-//serve forum home page
+
+//**********************************************************
+//*************serve forum home page************************
+//**********************************************************
+
 app.get('/forums', function(req, res)
 {
   //get the forum catagories data
@@ -55,7 +61,9 @@ app.get('/forums', function(req, res)
   });
 });
 
-//serve a forum catagory
+//*********************************************************************
+//****************serve a forum catagory*******************************
+//*********************************************************************
 app.get('/forums/:catagory', function(req, res, next)
 {
   //get the games collection
@@ -94,7 +102,9 @@ app.get('/forums/:catagory', function(req, res, next)
   });
 });
 
-//serve a specific thread
+//********************************************************************
+//******************serve a specific thread***************************
+//********************************************************************
 app.get('/forums/:catagory/:threadId', function(req, res, next)
 {
   //get the games collection
@@ -162,13 +172,17 @@ app.get('/forums/:catagory/:threadId', function(req, res, next)
   });
 });
 
-//serve 404 page
+//**************************************************************************
+//***********************serve 404 page*************************************
+//**************************************************************************
 app.get('*', function (req, res) {
   res.status(404);
   res.render('404');
 });
 
-//post for a new thread
+//**************************************************************************
+//**********************post for a new thread*******************************
+//**************************************************************************
 app.post('/forums/:catagory/newThread', function(req, res)
 {
   //log the the content if all values were sent
@@ -211,7 +225,9 @@ app.post('/forums/:catagory/newThread', function(req, res)
   }
 });
 
-//post for a new comment
+//***************************************************************************
+//**********************post for a new comment*******************************
+//***************************************************************************
 app.post('/forums/:catagory/:threadId/newComment', function(req, res)
 {
   //log the the content if all values were sent
@@ -300,6 +316,9 @@ app.post('/forums/:catagory/:threadId/newComment', function(req, res)
   }
 });
 
+//*************************************************************************
+//*******************Connect to db and start server************************
+//*************************************************************************
 MongoClient.connect(mongoURL, function (err, client) {
   if (err) {
     throw err;

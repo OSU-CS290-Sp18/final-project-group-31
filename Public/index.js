@@ -171,18 +171,25 @@ var post = function(event)
         }
         else
         {
-          //go to the new thread url
-          //LOOKATME! Note: add this after db is in place
+          //create the new comment
+          var newComment = Handlebars.templates.comment(data);
+
+          var forumItemContainer = document.querySelector('.forum-item-holder');
+          forumItemContainer.insertAdjacentHTML('beforeend', newComment);
+
+          //increment the commentCount on the already loaded page
+          var commentCount = document.getElementsByClassName('thread-comments')[0];
+          var commentCountText = commentCount.firstChild.nodeValue;
+          commentCountText = commentCountText.split(" ");
+          commentCountText[0]++;
+          commentCountText = commentCountText.join(" ");
+          commentCount.firstChild.nodeValue = commentCountText;
+
         }
       });
 
       //send the post request
       request.send(requestBody);
-
-      var newComment = Handlebars.templates.comment(data);
-
-      var forumItemContainer = document.querySelector('.forum-item-holder');
-      forumItemContainer.insertAdjacentHTML('beforeend', newComment);
     }
 
     //call cancelPost to remove the new post form
