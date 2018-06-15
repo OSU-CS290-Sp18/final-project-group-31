@@ -9,6 +9,10 @@ templates['collapsedThread'] = template({"compiler":[7,">= 4.0.0"],"main":functi
     + alias4(((helper = (helper = helpers.shortAuthor || (depth0 != null ? depth0.shortAuthor : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"shortAuthor","hash":{},"data":data}) : helper)))
     + "</h3>\r\n  <h3 class=\"thread-short-content\">"
     + alias4(((helper = (helper = helpers.shortContent || (depth0 != null ? depth0.shortContent : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"shortContent","hash":{},"data":data}) : helper)))
-    + "</h3>\r\n  <h3 class=\"thread-comments\">0 comments</h3>\r\n  <h3 class=\"thread-views\">0 views</h3>\r\n</a>\r\n";
+    + "</h3>\r\n  <h3 class=\"thread-comments\">"
+    + alias4(((helper = (helper = helpers.commentCount || (depth0 != null ? depth0.commentCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"commentCount","hash":{},"data":data}) : helper)))
+    + " comments</h3>\r\n  <h3 class=\"thread-views\">"
+    + alias4(((helper = (helper = helpers.viewCount || (depth0 != null ? depth0.viewCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"viewCount","hash":{},"data":data}) : helper)))
+    + " views</h3>\r\n</a>\r\n";
 },"useData":true});
 })();

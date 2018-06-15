@@ -6,66 +6,31 @@
     <h1 class="forum-label">Forums</h1>
   {{#if forumCatagories}}
       <div class="forum-item-holder">
-        <a href="/forums/General-Discussion" class="forum-item">
-          <img class="catagory-picture" src="/img/stickfiguretitle.png">
-          <h2 class="catagory-title">General Discussion</h2>
-          <h3 class="catagory-description">A place to talk about whatever (Within reason!).</h3>
-        </a>
-
-        <a href="/forums/Stick-Figure-Clicker" class="forum-item">
-          <img class="catagory-picture" src="/img/stickfiguretitle.png">
-          <h2 class="catagory-title">Stick Figure Clicker!</h2>
-          <h3 class="catagory-description">Discussion about the Stick Figure Clicker! game.</h3>
-        </a>
+        {{#each games}}
+          {{>catagory}}
+        {{/each}}
       </div>
   {{/if}}
 
   {{#if forumThreads}}
-    <a class="catagory-label-link" href="/forums/Stick-Figure-Clicker"><h1 class="catagory-label">Stick Figure Clicker! threads</h1></a>
+    <a class="catagory-label-link" href={{catagory}}><h1 class="catagory-label">{{catagoryLabel}}threads</h1></a>
     <button class="new-thread-button button" type="button" id="threadButton"><h1 class="new-thread-plus">+</h1>New Thread</button>
 
     <div class="forum-item-holder">
-      <a href="/forums/Stick-Figure-Clicker/123-this-is-a-thread" class="forum-item">
-        <h2 class="thread-subject">This is a thread</h2>
-        <h3 class="thread-author">By Author</h3>
-        <h3 class="thread-short-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet pretium mauris. Cras dapibus, ex quis ornare congue, massa metus...
-        </h3>
-        <h3 class="thread-comments">1 comments</h3>
-        <h3 class="thread-views">5 views</h3>
-      </a>
-
-      <a href="/forums/Stick-Figure-Clicker/925-this-is-also-a-thread" class="forum-item">
-        <h2 class="thread-subject">This is also a thread</h2>
-        <h3 class="thread-author">By Some Person</h3>
-        <h3 class="thread-comments">0 comments</h3>
-        <h3 class="thread-views">1 views</h3>
-      </a>
+      {{#each threads}}
+        {{>collapsedThread}}
+      {{/each}}
     </div>
   {{/if}}
 
   {{#if individualThread}}
     <a class="catagory-label-link" href="/forums/Stick-Figure-Clicker"><h1 class="catagory-label">Stick Figure Clicker! threads</h1></a>
     <div class="forum-item-holder">
-      <div class="forum-item" id="threadPost">
-        <h2 class="thread-subject">This is also a thread</h2>
-        <h3 class="thread-author">By Some Person</h3>
-        <h3 class="thread-comments">0 comments</h3>
-        <h3 class="thread-views">1 views</h3>
-        <h3 class="thread-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet pretium mauris. Cras dapibus, ex quis ornare congue, massa metus interdum tortor, non mollis odio odio a libero. Vivamus volutpat tortor leo, nec congue diam dictum id. Ut vulputate, lacus vel dignissim gravida, dui felis suscipit dui, sed vehicula purus massa vitae sem...
-        </h3>
-        <button type="button" class="reply-button button" id="replyButton"><img class="reply-button-img" src="/img/replybutton.png">Reply</button>
-      </div>
+      {{>thread threadObject}}
 
-      <div class="forum-item">
-        <h2 class="thread-subject">This is a comment</h2>
-        <h3 class="thread-author">By Commentator</h3>
-        <h3 class="thread-text">
-          What language is that?
-        </h3>
-        <div class="filler"></div>
-      </div>
+      {{#each comments}}
+        {{>comment}}
+      {{/each}}
     </div>
   {{/if}}
 
